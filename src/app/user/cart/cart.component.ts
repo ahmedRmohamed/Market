@@ -45,7 +45,7 @@ export class CartComponent {
     this.authService.getCurrentUserId().subscribe(uid => {
       this.userId = uid ?? '';
 
-      if (this.userId) {
+      if (uid) {
         this.firebaseService.getItems(`user/${this.userId}/cart`).subscribe(cartItems => {
           this.items = cartItems;
           if (cartItems) {
