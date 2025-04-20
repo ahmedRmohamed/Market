@@ -86,7 +86,7 @@ export class AdmcartComponent implements OnInit{
     }
 
     this.viewItems.sort((a:any,b:any)=>{
-      console.log(a.date)
+      
       return new Date(a.date).getTime() - new Date(b.date).getTime();
     })
   }
