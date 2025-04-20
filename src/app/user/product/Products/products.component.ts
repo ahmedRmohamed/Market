@@ -48,10 +48,12 @@ export class ProductsComponent implements OnInit{
   async ngOnInit(){
     this.authService.getCurrentUserId().subscribe(uid => {
       this.userId = uid?uid:'';
+      if(uid){
       this.firebaseService.getCart(this.userId).then(data=>{
         this.cartId=data
 
       })
+      }
       console.log("المعرف الفريد للمستخدم:", this.userId);
     });
     this.firebaseService.getItems(`products`).subscribe(data => {
