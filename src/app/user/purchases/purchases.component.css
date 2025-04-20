@@ -1,0 +1,56 @@
+.products{
+  margin: auto;
+  padding: 50px;
+  justify-content: space-evenly;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 20px;
+
+
+}
+@media (mix-width:768px) {
+
+  .products{
+    grid-template-columns: 1fr;
+  }
+}
+.card{
+  /* width: 200px; */
+  border: 2px solid #999;
+  border-radius: 5px;
+  padding: 0;
+  text-align: center;
+  padding-bottom: 10px;
+  justify-content: space-between;
+  .image{
+    overflow: hidden;
+    border-bottom:2px solid #999 ;
+    padding: 10px;
+  }
+  img{
+    width: 100%;
+  }
+  a{
+    text-decoration: none;
+    color: black;
+  }
+}
+.star span{
+ cursor: pointer;
+}
+
+.card:hover{
+  border-color: black;
+  transform: translateY(-10px);
+  transition: 0.7s;
+  .image{
+    border-color: black;
+  };
+
+}
+.not{
+  margin: 100px auto;
+  font-size: 50px;
+  font-weight: 600;
+}
+

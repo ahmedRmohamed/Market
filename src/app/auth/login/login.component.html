@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="login">
+    <input type="email" [(ngModel)]="email" placeholder="Email">
+    <input type="password" [(ngModel)]="password" placeholder="Password">
+    <button class="btn btn-success" (click)="login()">Log in</button>
+    @if (hid) {
+      <p>error!</p>
+    }
+    <p>i have not acount <a routerLink="/register">regester</a></p>
+  </div>
+</div>

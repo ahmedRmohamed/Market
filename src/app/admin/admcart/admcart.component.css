@@ -1,0 +1,63 @@
+.conttainer{
+  position: relative;
+
+}
+
+.back{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: #e2e2e282;
+  z-index: 1;
+}
+.hidden{
+  display: none;
+}
+.details ,.profile{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 2;
+  padding: 30px;
+  background-color: white;
+}
+.details{
+  max-height: 400px;
+  overflow-y: auto;
+}
+.data{
+  border: 2px solid black;
+  margin-top: 15px;
+  padding: 20px;
+  /* background-color: antiquewhite; */
+}
+.order{
+  padding: 20px;
+}
+.head{
+  padding: 20px;
+}
+.col{
+  text-align: center;
+}
+.image{
+  border-radius: 50%;
+  background-image: url(/public/assets/image/profail2.png);
+}
+
+
+@media (max-width:768px) {
+  .conttainer{
+    margin: 0;
+    padding: 0;
+  }
+  .cont{
+    padding: 5px !important;
+  }
+  .details ,.profile{
+    width: 80%;
+  }
+}

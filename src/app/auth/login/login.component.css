@@ -1,0 +1,36 @@
+.container{
+  /* width: 70%; */
+  margin: auto;
+  padding-top: 100px;
+}
+.login{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 50%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+}
+input{
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: 0.2s ease;
+}
+input:focus{
+  outline: none;
+  border-color:  #666;
+  box-shadow: 0 0 5px #5a5858;
+}
+@media  (max-width:768px)  {
+  .container{
+    width: 100%;
+    margin: 0;
+  }
+}

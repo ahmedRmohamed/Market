@@ -1,0 +1,31 @@
+@if (load) {
+  <app-wait></app-wait>
+}
+@else {
+<div class="container p-5">
+  <div class="users">
+    <div class="head row">
+      <div class="col col-2"></div>
+      <div class="col col-2">Name</div>
+      <div class="col col-3">Email</div>
+      <div class="col col-1">age</div>
+      <div class="col col-3">phone</div>
+      <div class="col col-1">order</div>
+    </div>
+    <div class="body">
+      @for (user of users; track $index) {
+
+        <div class="user row mb-2" >
+          <div class="col col-2"><img [src]="user.image" alt="" width="100%"></div>
+          <div class="col col-2" >{{user.name.fName +' '+ user.name.lName}}</div>
+          <div class="col col-3">{{user.email}}</div>
+          <div class="col col-1">{{user.age}}</div>
+          <div class="col col-3">{{user.phone}}</div>
+          <div class="col col-1">{{user.order}}</div>
+        </div>
+      }
+    </div>
+
+  </div>
+</div>
+}

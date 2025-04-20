@@ -1,0 +1,104 @@
+@if (load) {
+  <app-wait></app-wait>
+}
+@else {
+<div class="container">
+  <div class="cont">
+    <div class="btn">
+      <button type="button" class="btn btn-success" (click)="add()">Add Product</button>
+    </div>
+    <div class="products">
+      <table style="width: 100%;">
+        <thead>
+          <tr class="row">
+              <th class="col col-2"></th>
+              <th class="col col-3">Name</th>
+              <th class="col col-2">Category</th>
+              <th class="col col-1">Price</th>
+              <th class="col col-1">Count</th>
+              <th class="col col-3"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (product of products; track $index) {
+            <tr class="row " [style.background-color]="$index%2==0?'#999':'white'" >
+              <td class="col col-2"><img class="img" [src]="products[$index].image" alt="" width="100%" height="100px"></td>
+              <td class="col col-3">{{product.title}}</td>
+              <td class="col col-2">{{product.category}}</td>
+              <td class="col col-1">{{product.price}} L.E</td>
+              <td class="col col-1">{{product.rating?.count}} piece</td>
+              <td class="col col-3 row gap-1">
+                <div class="col-12 col-lg-5"><button class="btn btn-warning w-100" (click)="update(product)">Update</button></div>
+                <div class="col-12 col-lg-5"><button type="button" class="btn btn-danger w-100" (click)="delete(product)">Delete</button> </div>
+              </td>
+
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="back" [class.hidden]="hidden" (click)="cancel()"></div>
+  <div class="add" [class.hidden]="hidden">
+    <div class="d-flex justify-content-between w-100">
+      <h2>Add Product</h2>
+      <h3 class="text-danger" (click)="cancel()" style="cursor: pointer;">X</h3>
+    </div>
+    <form [formGroup]="addForm" class="row">
+      <div class="col col-4">
+        <label for="title">Title</label>
+        <input id="title" type="text" formControlName="title" placeholder="title">
+      </div>
+      <div class="col col-2">
+        <label for="price">Price</label>
+        <input id="price" type="number" formControlName="price" placeholder="price">
+      </div>
+      <div class="col col-2">
+        <label for="price">Count</label>
+        <input id="price" type="number" formControlName="count" placeholder="count">
+      </div>
+      <div class="col col-4">
+        <label for="category">Category</label>
+        <select formControlName="category" id="category">
+          <option value="men's clothing">Men's clothing</option>
+          <option value="jewelery">Jewelery</option>
+          <option value="electronics">Electronics</option>
+          <option value="women's clothing">Women's clothing</option>
+        </select>
+      </div>
+      <div class="col col-4 " >
+        <label for="image">image</label>
+        <img [src]="image" alt="" width="100%" height="100px">
+        <div class="sp">
+          <button  (click)="img='url'">URL</button>
+          <button  (click)="img='pc'">your PC</button>
+        </div>
+        <div>
+          @if (img==='url') {
+            <input id="title" type="url" formControlName="image" >
+            <button (click)="imgUrl()" [disabled]="!isValidUrl()">Ok</button>
+          }
+          @else if (img==='pc') {
+            <input id="title" type="file" formControlName="image" (change)="onFileSelected($event)" accept="image/*">
+          }
+        </div>
+      </div>
+      <div class="col col-8">
+        <label for="description">Description</label>
+        <!-- <input id="title" type="" formControlName="title" placeholder="title"> -->
+        <textarea formControlName="description" id="description" placeholder="description"></textarea>
+      </div>
+
+    </form>
+    <div class="pt-3 pb-3 d-flex justify-content-end">
+      @if (isAdd) {
+        <button class="btn btn-success" [disabled]="!addForm.valid" (click)="addProduct()">Add</button>
+      }
+      @else {
+        <button class="btn btn-success" [disabled]="!addForm.valid" (click)="updateData()">Up date</button>
+      }
+
+    </div>
+  </div>
+</div>
+}

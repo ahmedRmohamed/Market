@@ -1,0 +1,45 @@
+@if (load) {
+  <app-wait></app-wait>
+}
+@else {
+<div class="container p-5">
+  <div class="products row gap-3 ">
+    @if (!products) {
+      <div class="not">
+        Not Found!
+      </div>
+    }
+    @for (product of products; track $index) {
+      <div class="card ">
+        <a [routerLink]="['/details', product.productId]" [queryParams]="{ path: '/purchases'}">
+          <div class="image">
+            <img [src]="product.image" height="200px">
+          </div>
+          <div class="text p-2">
+            <h5>{{product.title}}</h5>
+
+          </div>
+        </a>
+        <div>
+          <p class="text-center " style="font-size: 20px;">Count : {{product.quantity}}</p>
+
+        <div class="star text-center">
+          @for (star of [1,2,3,4,5]; track $index) {
+            @if (product.rate >= star) {
+              <span (click)="rate(star,product)">
+                <i class="fa-solid fa-star" style="color: #FFD43B;font-size: 25px;"></i>
+              </span>
+            }
+            @else {
+              <span (click)="rate(star,product)">
+                <i class="fa-regular fa-star" style="font-size: 25px;"></i>
+              </span>
+            }
+          }
+        </div>
+      </div>
+      </div>
+    }
+  </div>
+</div>
+}

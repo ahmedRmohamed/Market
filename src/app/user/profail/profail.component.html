@@ -1,0 +1,48 @@
+@if (load) {
+  <app-wait></app-wait>
+}
+@else {
+<div class="cont ">
+  <!-- <div class="head  d-flex align-items-center flex-column">
+  </div> -->
+
+  <form [formGroup]="proForm">
+    <div class="image">
+      <div class="img">
+        <div  [style.display]="(edit)?((image)?'block':'none'):'none'" (click)="cancel()" class="text-light" ><i class="fa-solid fa-xmark"></i></div>
+        <img [src]="image" alt="">
+        <input id="fileInput" class="sp" type="file" formControlName="image" (change)="onFileSelected($event)" accept="image/*">
+        <label for="fileInput" class="upload" [class.sp]="!edit">
+          <i class="fa-solid fa-camera"></i>
+        </label>
+      </div>
+
+    </div>
+    <div class="input">
+      <div formGroupName="name" class="d-flex gap-1">
+        <input class="name" type="text" formControlName="fName" placeholder="Frist Name" [readonly]="!edit">
+        <input class="name" type="text" formControlName="lName" placeholder="Last Name" [readonly]="!edit">
+      </div>
+
+      <input type="text" formControlName="phone" placeholder="Phone" [readonly]="!edit">
+      <input type="number" formControlName="age" placeholder="Age" [readonly]="!edit">
+      <input type="email" formControlName="email" placeholder="Email" readonly>
+    </div>
+    <div>
+      @if (!edit) {
+        <div class="text-center mb-3 d-flex gap-1">
+          <button class="btn btn-warning " (click)="edit=true">Edit</button>
+          <button class="btn btn-danger" (click)="logOut()">Log Out</button>
+        </div>
+      }
+      @else {
+        <div>
+          <button class="btn btn-success me-2" (click)="save()">Save</button>
+          <button class="btn btn-danger" (click)="edit=false;info()">Cancel</button>
+        </div>
+      }
+
+    </div>
+  </form>
+</div>
+}

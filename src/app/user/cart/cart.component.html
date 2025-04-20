@@ -1,0 +1,116 @@
+@if (load) {
+  <app-wait></app-wait>
+}
+@else {
+<div class="container">
+
+  <div>
+    <div class="head">
+      <h1>Shopping cart</h1>
+      <p>You have <span class="text-danger">{{items.length}}</span>  item in your cart</p>
+    </div>
+    <div class="cont">
+      <div class="data" style="width: 100%;">
+        <div class="row des">
+          <div class="col col-1"></div>
+          <div class="col col-2">Title</div>
+          <div class="col col-1">Price</div>
+          <div class="col col-3">Quantity</div>
+          <div class="col col-2 text-center">Total</div>
+          <div class="col col-3"></div>
+        </div>
+        <!-- <form > -->
+          <div style="width: 100%;">
+            @for (item of items; track $index ) {
+                <div class="row align-items-center p-3 parent"  [style.backgroundColor]="$index % 2==0 ? '#dbd9d9' : 'white'" >
+                  @if (custom) {
+                    <div class="check">
+                      @if(isDisabled[$index]){
+                        <span>
+                          <i class="fa-solid fa-square" style="font-size: xx-large;"></i>
+                        </span>
+                      }
+                      @else if (isCustom[$index]) {
+                        <span (click)="isCustom[$index]=false;customItems()">
+                          <i class="fa-regular fa-square-check" style="font-size: xx-large; cursor: pointer;"></i>
+                        </span>
+                      }
+                      @else {
+                        <span (click)="isCustom[$index]=true;customItems()">
+                          <i class="fa-regular fa-square" style="font-size: xx-large;cursor: pointer;" ></i>
+                        </span>
+                      }
+                    </div>
+                  }
+                  <div class="col col-lg-1"><div style="border-radius: 50%;"><img style="border-radius: 50%;" [src]="item.item.image" alt="" width="100px" height="100px"></div></div>
+                  <div class="col col-lg-2"><p>{{item.item.title}}</p></div>
+                  <div class="col col-lg-1">{{(item.item.price).toFixed(3)}} L.E</div>
+                  <td class="col col-lg-3">
+                    <button type="button" class="btn btn-primary" (click)="plus(item,$index)">+</button>
+                    <input type="number" [ngModel]="item.quantity" (ngModelChange)="item.quantity = $event" [ngModelOptions]="{standalone: true}" min="1">
+                    <button type="button" class="btn btn-primary" (click)="minas(item,$index) " >-</button>
+                  </td>
+                  <td class="col col-lg-2"><p class="text-center">{{total(item)}} L.E</p></td>
+                  <div class="col col-lg-3 text-center d-flex flex-column">
+                    @if (!custom) {
+                      <div>
+                        <button type="button" class="btn btn-danger" (click)="delete(item)">Delete</button>
+                        <button type="button" class="btn btn-success ms-2" (click)="orderOne(item)" [disabled]="isDisabled[$index]">Order</button>
+                      </div>
+                    }
+                    @if (isDisabled[$index]) {
+                      <p>Not enough numbers</p>
+                    }
+                    <!-- <div [style]="item.disabled?'display:block':'display:none'">
+                      <p>Not enough numbers</p>
+                    </div> -->
+                  </div>
+                </div>
+            }
+          </div>
+        <!-- </form> -->
+      </div>
+    </div>
+    @if (custom) {
+      <div class="d-flex justify-content-end mt-3 row" style="z-index: 5;position: relative;">
+        <p class="col col-lg-2">Total : {{getTotal(cusItems)}} L.E</p>
+        <div class="col col-lg-2  text-center d-flex gap-1">
+          <div>
+            <button type="button" class="btn btn-success" (click)="cusOrder()" [disabled]="!isCustom.includes(true)">Order</button>
+          </div>
+          <div>
+            <button type="button" class="btn btn-danger" (click)="cancel()" >Cancel</button>
+          </div>
+        </div>
+      </div>
+    }
+    @else {
+      <div id="btn" class="row m-0 mt-1">
+        <div class="top col-lg-7">
+          <button type="button" class="btn btn-danger" (click)="clear()">Clear shopping cart</button>
+        </div>
+        <div class="bottom col-lg-5 row justfiy-content-between">
+          <p class="col-lg-4">Total : {{getTotal(items)}} L.E</p>
+          <div class="col-lg-8 row " >
+            <div class="col">
+              <button type="button" class="btn btn-success w-100" (click)="order(items)" [disabled]="items.length<1||disabled">Order All</button>
+            </div>
+            <div class="col">
+              <button type="button" class="btn btn-success w-100" (click)="custom=true" [disabled]="items.length<1">Custom Order</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
+    @if (success) {
+      <div class="alert alert-success mt-3" role="alert">
+        ✅ Order Done
+      </div>
+    }
+  </div>
+</div>
+@if (custom) {
+  <div class="back"></div>
+}
+}

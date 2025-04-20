@@ -1,0 +1,28 @@
+.container{
+  display: flex;
+  justify-content: center;
+}
+
+span{
+  font-size: large;
+  font-weight: 800;
+}
+
+.arrow{
+  position: absolute;
+  top: 120px;
+  left: 30px;
+  cursor: pointer;
+  font-size: 25px;
+}
+
+@media(max-width: 768px){
+
+  .cont{
+    flex-direction: column;
+    width: 80%;
+  }
+  .arrow{
+    top: 70px;
+  }
+}

@@ -1,0 +1,64 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-danger">
+  <div class="container d-flex justfiy-content-between">
+    <span class="navbar-brand fw-bold fs-1 text-light">Market</span>
+    <!-- <a class="navbar-brand" href="#">Market</a> -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto fs-2 fw-simebold">
+
+
+
+        @if(isLoggedIn){
+
+          @if (role==='user') {
+            <li class="nav-item" >
+              <a class="nav-link" routerLink="products" routerLinkActive="active">Products</a>
+            </li>
+            <li class="nav-item ms-5" >
+              <a class="nav-link" routerLink="cart" routerLinkActive="active">Cart</a>
+
+            </li>
+            <li class="nav-item ms-5" >
+              <a class="nav-link" routerLink="purchases" routerLinkActive="active">My purchases</a>
+
+            </li>
+            <li class="ms-5">
+              <a class="nav-link " routerLink="profail" routerLinkActive="active">
+                <div class="img">
+                  <img class="" [src]="image" alt="">
+                </div>
+              </a>
+            </li>
+          }
+          @else if (role==='admine') {
+            <li class="nav-item" >
+              <a class="nav-link" routerLink="/admProducts" routerLinkActive="active">Products</a>
+            </li>
+            <li class="nav-item ms-5" >
+              <a class="nav-link" routerLink="/admCart" routerLinkActive="active">Cart</a>
+            </li>
+            <li class="nav-item ms-5" >
+              <a class="nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+            </li>
+            <li class="nav-item ms-5">
+              <a class="nav-link" routerLink="/register" routerLinkActive="active" (click)="logOut()">Log out</a>
+            </li>
+          }
+
+
+
+        }
+        @else {
+          <li class="nav-item" >
+            <a class="nav-link" routerLink="guestProducts" routerLinkActive="active">Products</a>
+          </li>
+          <li class="nav-item ms-5">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active">Log in</a>
+          </li>
+        }
+      </ul>
+    </div>
+  </div>
+</nav>

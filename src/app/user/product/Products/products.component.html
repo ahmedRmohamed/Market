@@ -1,0 +1,63 @@
+<div class="container p-5 ">
+  @if (load) {
+    <app-wait></app-wait>
+  }
+  @else {
+  <div class="mb-5">
+    <select name="categories" id="" [formControl]="selectedControl" >
+      <option value="all">All</option>
+      <option value="electronics">Electronics</option>
+      <option value="jewelery">Jewelery</option>
+      <option value="men's clothing">Men's clothing</option>
+      <option value="women's clothing">women's clothing</option>
+    </select>
+  </div>
+    <div class="cont "  >
+
+      @for (product of products; track $index) {
+        @if (product.category===selectedControl.value || selectedControl.value==="all") {
+          <div class="card p-0 " [id]="product.id">
+            <a [routerLink]="['/details', product.id]" [queryParams]="userId?{ path: '/products'}:{ path: '/guestProducts'}">
+              <img [src]="product.image" class="card-img-top" width="100%" height="200px">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title" style="height: 100px;">{{product.title}}</h5>
+              <p class="card-text text-center" style="font-size: larger;">Count : {{product.rating.count}}</p>
+
+              <div class="star text-center p-2">
+                @for (star of [1,2,3,4,5]; track $index) {
+                  @if (product.rating.rate >= star) {
+                    <span >
+                      <i class="fa-solid fa-star" style="color: #FFD43B;"></i>
+                    </span>
+                  }
+                  @else {
+                    <span >
+                      <i class="fa-regular fa-star" ></i>
+                    </span>
+                  }
+                }
+              </div>
+              <div class="d-flex" [style]="userId?'justify-content:space-between':'justify-content:center'">
+                @if (userId) {<div class="d-flex" >
+                  @if(idclick===product.id && addDisplay){
+                    <input type="number" style="width: 75px;" [formControl]="input" min="1">
+                    <button type="button" class="btn btn-danger" (click)="add(product)" [disabled]="input.value<1 || product.rating.count <input.value" >Add</button>
+                  }
+                  @else{
+                    <button type="button" class="btn btn-success" (click)="addTocart(product) ">Add to cart</button>
+                  }
+                </div>
+              }
+
+                <span class="p-2 bg-info rounded-4">{{product.price}} L.E</span>
+              </div>
+            </div>
+          </div>
+        }
+
+      }
+    </div>
+    <!-- <button (click)="update()">update</button> -->
+  }
+</div>
