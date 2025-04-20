@@ -43,6 +43,10 @@ export class CartComponent {
 
 
     this.authService.getCurrentUserId().subscribe(uid => {
+       if (!uid || uid.trim() === '') {
+        console.warn("⚠️ لم يتم العثور على userId، تأكد من تسجيل الدخول.");
+        return; // ❗️ أوقف التنفيذ هنا
+      }
       this.userId = uid ?? '';
 
       if (uid) {
