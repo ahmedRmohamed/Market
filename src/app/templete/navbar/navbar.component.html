@@ -27,7 +27,9 @@
             <li class="ms-5">
               <a class="nav-link " routerLink="profail" routerLinkActive="active">
                 <div class="img">
-                  <img class="" [src]="image" alt="">
+                  if(image){
+                    <img class="" [src]="image" alt="">
+                  }
                 </div>
               </a>
             </li>
