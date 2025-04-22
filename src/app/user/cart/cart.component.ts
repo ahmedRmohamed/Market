@@ -158,6 +158,9 @@ export class CartComponent {
   chek(item:any,index:number){
     this.firebaseService.getProductCountById(item.item.id).subscribe(count=>{
       this.isDisabled[index]=(item.quantity>count)
+      if (item.quantity>count) {
+        this.isCustom[index]=false
+      }
       this.disabled=this.isDisabled.includes(true)
       this.customItems()
     })
