@@ -224,20 +224,20 @@ getItems(path:string): Observable<any[]> {
     return () => unsubscribe(); // إلغاء الاشتراك عند عدم الحاجة
   });
 }
+
 getPurch(userId:string): Observable<any[]> {
   return new Observable(observer => {
     const cartRef = collection(this.firestore, `user/${userId}/purch`);
 
-    // ✅ مراقبة التحديثات في الوقت الحقيقي
     const unsubscribe = onSnapshot(cartRef, (snapshot) => {
       if (snapshot.empty) {
         console.warn("⚠️ لا توجد منتجات في السلة.");
-        observer.next([]); // تحديث المصفوفة الفارغة
+        observer.next([]);
         return;
       }
 
       const cartItems = snapshot.docs.map(doc => ({
-        purchId: doc.id, // ✅ استخدام `document ID`
+        purchId: doc.id,
         ...doc.data()
       }));
 
@@ -290,6 +290,7 @@ async getAllOrders(orderId:string) {
   return orders;
 }
 async getCart(userId:string) {
+
   const x=collection(this.firestore, `user/${userId}/cart`)
   const ordersSnapshot=await getDocs(x)
 
@@ -380,7 +381,8 @@ async updatePurch( userId: string,purchId:string, updatedData: any) {
       console.error("❌ خطأ أثناء حذف المنتج:", error);
     }
   }
-  async deleteItem(itemId: string,path:string): Promise<void> {
+
+async deleteItem(path:string,itemId: string): Promise<void> {
     if (!itemId) {
       console.error("❌ Error: userId أو productId غير موجود!");
       return;
@@ -393,6 +395,28 @@ async updatePurch( userId: string,purchId:string, updatedData: any) {
     } catch (error) {
       console.error("❌ خطأ أثناء حذف المنتج:", error);
     }
+
+  }
+async deleteItemOrders(itemId:string): Promise<void> {
+    if (!itemId) {
+      console.error("❌ Error: userId أو productId غير موجود!");
+      return;
+    }
+
+    try {
+      const ordersCollectionRef = collection(this.firestore, `cartOrder/${itemId}/orders`);
+      const ordersSnapshot = await getDocs(ordersCollectionRef);
+      
+      const deletePromises = ordersSnapshot.docs.map(orderDoc =>
+        deleteDoc(doc(this.firestore, `cartOrder/${itemId}/orders/${orderDoc.id}`))
+      );
+
+    await Promise.all(deletePromises);
+      console.log(`✅ المنتج (${itemId}/orders) تم حذفه بنجاح!`);
+    } catch (error) {
+      console.error("❌ خطأ أثناء حذف المنتج:", error);
+    }
+
   }
 
 

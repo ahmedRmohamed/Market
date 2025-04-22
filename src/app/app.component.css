@@ -6,7 +6,11 @@
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
   text-align: center;
 }
-
+@media (max-width:768px) {
+  .container{
+    
+  }
+}
 button {
   width: 100%;
   padding: 10px;

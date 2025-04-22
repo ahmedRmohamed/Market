@@ -19,6 +19,8 @@ export class PurchasesComponent implements OnInit {
   products:any[]=[]
   load:boolean=true
   userId:string=''
+  isDelete:boolean=false
+  deleteId:string=''
 
   ngOnInit(){
     this.authService.getCurrentUserId().subscribe(uid=>{
@@ -28,6 +30,7 @@ export class PurchasesComponent implements OnInit {
           this.products=data
           if (data) {
             this.load=false
+            // console.log(data)
           }
         })
       }
@@ -74,5 +77,19 @@ export class PurchasesComponent implements OnInit {
     }})
 
 
+  }
+  isdelete(purchId:string){
+    console.log(purchId)
+    this.isDelete=true
+    this.deleteId=purchId
+  }
+  cancel(){
+    this.isDelete=false
+  }
+  delete(){
+    if (this.deleteId) {
+      this.firebaseService.deleteItem(`user/${this.userId}/purch`,this.deleteId)
+      this.cancel()
+    }
   }
 }

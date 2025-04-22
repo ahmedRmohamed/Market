@@ -4,7 +4,7 @@ import { FirebaseService, item, Product } from '../../services/firebase.service'
 import { Router } from '@angular/router';
 import { collection, onSnapshot, Timestamp } from 'firebase/firestore';
 import { AuthService } from '../../services/auth.service';
-import { forkJoin } from 'rxjs';
+import { filter, forkJoin } from 'rxjs';
 import { WaitComponent } from "../../templete/wait/wait.component";
 
 interface CartItem {
@@ -35,6 +35,7 @@ export class CartComponent {
   custom:boolean=false;
   isCustom:boolean[]=[]
   isRun:boolean=false
+  done:boolean=false
   load:boolean=true
   constructor(private firebaseService:FirebaseService,private authService:AuthService,private cdRef: ChangeDetectorRef){}
 
@@ -43,14 +44,14 @@ export class CartComponent {
 
 
     this.authService.getCurrentUserId().subscribe(uid => {
-       if (!uid || uid.trim() === '') {
+      if (!uid || uid.trim() === '') {
         console.warn("⚠️ لم يتم العثور على userId، تأكد من تسجيل الدخول.");
         return; // ❗️ أوقف التنفيذ هنا
       }
       this.userId = uid ?? '';
 
       if (uid) {
-        this.firebaseService.getItems(`user/${this.userId}/cart`).subscribe(cartItems => {
+        this.firebaseService.getItems(`user/${uid}/cart`).subscribe(cartItems => {
           this.items = cartItems;
           if (cartItems) {
             this.load=false
@@ -82,7 +83,7 @@ export class CartComponent {
         console.warn("⚠️ لم يتم العثور على userId، تأكد من تسجيل الدخول.");
       }
 
-    });
+  });
   }
 
 
@@ -141,6 +142,8 @@ export class CartComponent {
       this.firebaseService.addOrder(this.userId,items,this.timeNow(),name)
       const nOrder=this.user.order + 1
       this.firebaseService.updateUser(this.user.id,{order:nOrder})
+      this.done=true
+      setTimeout(()=>this.done=false,4000)
     }
 
   }

@@ -51,6 +51,7 @@ export class AdmcartComponent implements OnInit{
 
       this.orders=data
       if (data) {
+        console.log(data)
         this.load=false
       }
       this.view()
@@ -86,7 +87,7 @@ export class AdmcartComponent implements OnInit{
     }
 
     this.viewItems.sort((a:any,b:any)=>{
-      
+
       return new Date(a.date).getTime() - new Date(b.date).getTime();
     })
   }
@@ -115,7 +116,9 @@ export class AdmcartComponent implements OnInit{
 async done(order: any) {
 
   try {
-    await this.firebaseService.deleteItem(order.orderId, 'cartOrder');
+    console.log(order.orderId,order.orders.subOrderId )
+    await this.firebaseService.deleteItem( 'cartOrder',order.orderId);
+    await this.firebaseService.deleteItemOrders(order.orderId);
 
     let purchs = await firstValueFrom(this.firebaseService.getPurch(order.userId));
 
@@ -155,7 +158,8 @@ async done(order: any) {
     console.error('❌ خطأ أثناء جلب البيانات:', error);
   }
 
-  await this.firebaseService.deleteItem(order.orderId, 'cartOrder');
+  console.log(order.orderId)
+  // await this.firebaseService.deleteItem(order.orderId, 'cartOrder');
 }
 
 

@@ -1,4 +1,7 @@
-.conttainer{
+*:not(.container){
+  margin: 0;
+}
+.container{
   position: relative;
 
 }
@@ -18,7 +21,7 @@ tr td{
   display: flex;
   align-items: center;
 }
-.add{
+.add,.delete{
   position: fixed;
   top: 50%;
   left: 50%;
@@ -27,6 +30,7 @@ tr td{
   padding: 30px;
   background-color: white;
 }
+
 form > div{
   display: flex;
   flex-direction: column;
@@ -42,9 +46,63 @@ form textarea{
   display: flex;
   justify-content: space-between;
 }
+.delete p{
+  text-align: center;
+}
+.delete div{
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+
+
 @media (max-width:768px) {
+  .cont > .btn ,.cont >  .btn button{
+    width: 100%;
+  }
   .add{
     width: 80%;
+  }
+  thead{
+    display: none;
+  }
+  tbody tr{
+    flex-direction: column;
+    padding: 10px;
+    td{
+      position: relative;
+      padding:5px 0;
+      width: 100%;
+      .btn{
+        margin: 0;
+      }
+      .img{
+        width: 100px;
+        margin: auto;
+      }
+      p{
+        margin: auto;
+        text-align: center;
+      }
+    };
+
+
+
+  }
+  tr td:not(.row){
+    border-bottom: 1px solid black;
+  }
+  .add,.delete{
+    width: 80%;
+  }
+  .add{
+    form{
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    button{
+      width: 100%;
+    }
   }
 }
 

@@ -5,6 +5,11 @@
 @if (load) {
   <app-wait></app-wait>
 }
+@else if (notFound) {
+  <div class="not">
+    <p class="text-danger">The administrator deleted this product.</p>
+  </div>
+}
 @else {
 @if (product) {
   <div class="container">
@@ -36,6 +41,8 @@
         </p>
       </div>
     </div>
+    
+
   </div>
 }
 }

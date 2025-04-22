@@ -47,7 +47,9 @@
   border-radius: 50%;
   background-image: url(/public/assets/image/profail2.png);
 }
-
+.small{
+  display: none;
+}
 
 @media (max-width:768px) {
   .conttainer{
@@ -59,5 +61,37 @@
   }
   .details ,.profile{
     width: 80%;
+  }
+  .small{
+    display: inline;
+  }
+  .head{
+    display: none;
+  }
+  .order{
+    flex-direction: column;
+    .row{
+      margin-top: 5px !important;
+    }
+  }
+  .order > div:not(.row){
+    padding: 5px;
+    border-bottom: 1px solid black;
+  }
+  .profile,.details{
+    .head{
+      display: none;
+    }
+    .body{
+      flex-direction: column;
+      div{
+        padding: 5px;
+        width: 100%;
+      }
+    }
+  }
+  .details .body{
+    max-height: 320px;
+    overflow-y: auto;
   }
 }

@@ -16,6 +16,7 @@ export class DetailsComponent {
   product:any={};
   path:string=''
   load:boolean=true
+  notFound:boolean=false
   private router:Router=inject(Router)
   private firebaseService:FirebaseService=inject(FirebaseService)
 
@@ -29,6 +30,12 @@ export class DetailsComponent {
       if (this.product) {
         this.load=false
       }
+      setTimeout(()=>{
+        if (!this.product) {
+          this.load=false
+          this.notFound=true
+        }
+      },4000)
     }
     this.route.queryParams.subscribe(params=>{
       this.path=params['path']

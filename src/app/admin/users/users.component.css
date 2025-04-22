@@ -1,10 +1,33 @@
-img{
+.image{
   width: 100px;
   height: 100px;
   border-radius: 50%;
+  background-image: url("/assets/image/profail2.png");
+  background-size: cover;
 }
 .users .col{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.small{
+  display: none;
+}
+@media (max-width:768px) {
+  .head{
+    display: none;
+  }
+  .user{
+    flex-direction: column;
+  }
+  .user > div{
+    padding: 5px;
+    width: 100%;
+  }
+  .user > div:not(.l){
+    border-bottom: 1px solid black;
+  }
+  .small{
+    display: inline;
+  }
 }

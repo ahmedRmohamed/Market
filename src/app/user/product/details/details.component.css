@@ -15,6 +15,13 @@ span{
   cursor: pointer;
   font-size: 25px;
 }
+.not{
+  position: absolute;
+  padding: 10px;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 @media(max-width: 768px){
 

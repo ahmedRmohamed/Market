@@ -23,6 +23,8 @@ export class AdmproductsComponent implements OnInit{
   updateId:string=''
   img:string=''
   load=true
+  isDelete:boolean=false
+  deleteProduct:string=''
   private firebaseService:FirebaseService=inject(FirebaseService)
   private fb:FormBuilder=inject(FormBuilder)
 
@@ -58,6 +60,7 @@ export class AdmproductsComponent implements OnInit{
     this.image=''
   }
   cancel(){
+    this.isDelete=false
     this.hidden=true
     this.img=''
   }
@@ -137,11 +140,16 @@ export class AdmproductsComponent implements OnInit{
     this.cancel()
   }
 
-  delete(product:item){
-    if (product.id) {
-      this.firebaseService.deleteItem(product.id,'products')
-    }
+  isdelete(product:item){
 
+    this.deleteProduct=product.id!
+    this.isDelete=true
+  }
+  delete(){
+    if (this.deleteProduct) {
+      this.firebaseService.deleteItem('products',this.deleteProduct)
+      this.cancel()
+    }
   }
 
   isValidUrl(): boolean {

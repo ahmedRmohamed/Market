@@ -8,6 +8,7 @@ import { AuthService } from '../../../services/auth.service';
 import { Firestore } from '@angular/fire/firestore';
 import { count } from 'node:console';
 import { WaitComponent } from "../../../templete/wait/wait.component";
+import { UserService } from '../../../services/user.service';
 
 export interface item{
   category:string;
@@ -41,10 +42,17 @@ export class ProductsComponent implements OnInit{
   cartId:any[]=[]
   load:boolean=true
   selectedControl = new FormControl('all');
-  constructor(private firebaseService:FirebaseService){}
-  private route = inject(Router);
+  focusId:string=''
+
+
+
+
+  private firebaseService:FirebaseService = inject(FirebaseService);
+  private router = inject(Router);
   private authService:AuthService = inject(AuthService);
-  private firestore:Firestore=inject(Firestore)
+
+
+
   async ngOnInit(){
     this.authService.getCurrentUserId().subscribe(uid => {
       this.userId = uid?uid:'';
@@ -53,10 +61,15 @@ export class ProductsComponent implements OnInit{
         this.cartId=data
 
       })
+      if (uid) {
+        this.firebaseService.getCart(this.userId).then(data=>{
+          this.cartId=data
+
+        })
       }
       console.log("المعرف الفريد للمستخدم:", this.userId);
-    });
-    this.firebaseService.getItems(`products`).subscribe(data => {
+  }});
+    this.firebaseService.getItems(`products`).subscribe( data => {
       this.products = data;
       if (data) {
         this.load=false
@@ -78,7 +91,6 @@ export class ProductsComponent implements OnInit{
       if(product.rating.count>=this.input.value){
         this.addDisplay=false;
         this.idclick=product.id;
-        // console.log(product.id,'==',this.x)
         const found=this.cartId.find(item => item.productId === product.id)
 
         if (found) {
@@ -114,4 +126,9 @@ export class ProductsComponent implements OnInit{
 
 
 
+  details(productId:string){
+    this.router.navigate(['/details', productId], {
+      queryParams: { path: this.userId?'/products':'/guestProducts' }
+    });
+  }
 }

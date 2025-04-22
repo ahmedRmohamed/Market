@@ -1,16 +1,19 @@
 @if (load) {
   <app-wait></app-wait>
 }
+@else if (products.length===0) {
+  <div class="yet">
+    <p class="text-danger">You haven't bought yet.</p>
+  </div>
+}
 @else {
-<div class="container p-5">
+<div class="container p-lg-5">
   <div class="products row gap-3 ">
-    @if (!products) {
-      <div class="not">
-        Not Found!
-      </div>
-    }
     @for (product of products; track $index) {
       <div class="card ">
+        <div class="trash">
+          <span (click)="isdelete(product.purchId)"><i class="fa-solid fa-trash"></i></span>
+        </div>
         <a [routerLink]="['/details', product.productId]" [queryParams]="{ path: '/purchases'}">
           <div class="image">
             <img [src]="product.image" height="200px">
@@ -37,9 +40,21 @@
             }
           }
         </div>
+
       </div>
       </div>
     }
   </div>
 </div>
+@if (isDelete) {
+  <div class="back"  (click)="cancel()"></div>
+  <div class="delete" [class.hidden]="!isDelete">
+    <p>You want delete this product?</p>
+    <div>
+      <button class="btn btn-danger" (click)="delete()">Delete</button>
+      <button class="btn btn-warning" (click)="cancel()">Cancel</button>
+    </div>
+  </div>
+}
+
 }

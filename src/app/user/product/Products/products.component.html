@@ -16,11 +16,9 @@
 
       @for (product of products; track $index) {
         @if (product.category===selectedControl.value || selectedControl.value==="all") {
-          <div class="card p-0 " [id]="product.id">
-            <a [routerLink]="['/details', product.id]" [queryParams]="userId?{ path: '/products'}:{ path: '/guestProducts'}">
-              <img [src]="product.image" class="card-img-top" width="100%" height="200px">
-            </a>
-            <div class="card-body">
+          <div class="card p-0 " [id]="'p-'+product.id" tabindex="-1" >
+            <div class="card-body" (click)="details(product.id)">
+              <img [src]="product.image" class="card-img-top p-2" width="100%" height="200px">
               <h5 class="card-title" style="height: 100px;">{{product.title}}</h5>
               <p class="card-text text-center" style="font-size: larger;">Count : {{product.rating.count}}</p>
 
@@ -38,11 +36,13 @@
                   }
                 }
               </div>
-              <div class="d-flex" [style]="userId?'justify-content:space-between':'justify-content:center'">
+            </div>
+
+              <div class="d-flex p-2" [style]="userId?'justify-content:space-between':'justify-content:center'">
                 @if (userId) {<div class="d-flex" >
                   @if(idclick===product.id && addDisplay){
-                    <input type="number" style="width: 75px;" [formControl]="input" min="1">
-                    <button type="button" class="btn btn-danger" (click)="add(product)" [disabled]="input.value<1 || product.rating.count <input.value" >Add</button>
+                    <input type="number" style="width: 75px;padding: 5px;border-radius: 5px;" [formControl]="input" min="1" >
+                    <button type="button" class="btn btn-danger " (click)="add(product)" [disabled]="input.value<1 " >Add</button>
                   }
                   @else{
                     <button type="button" class="btn btn-success" (click)="addTocart(product) ">Add to cart</button>
@@ -52,7 +52,7 @@
 
                 <span class="p-2 bg-info rounded-4">{{product.price}} L.E</span>
               </div>
-            </div>
+
           </div>
         }
 

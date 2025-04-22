@@ -6,7 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserService {
 
-  constructor() { }
+  productId:string=''
+
   private profileImageSubject = new BehaviorSubject<string>('assets/default-avatar.png');
   private roleSubject = new BehaviorSubject<string>('assets/default-avatar.png');
 

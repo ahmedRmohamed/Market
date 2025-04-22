@@ -5,17 +5,14 @@
 <div class="container">
   <div class="cont p-5">
     <form class="row justfiy-content-between" [formGroup]="dataForm">
-      <div class=" col-3">
+      <div class="col col-lg-3">
         <label for="from">From  </label>
         <input id="from" type="date" formControlName="from" class="w-100" (change)="view()">
       </div>
-      <div class=" col-3 " >
+      <div class="col col-lg-3 " >
         <label for="to">To  </label>
         <input id="to" type="date" formControlName="to" class="w-100" (change)="view()">
       </div>
-      <!-- <div class="col co-2 d-flex justfiy-content-center">
-        <button class="btn btn-success m-auto" (click)="test()" [disabled]="!dataForm.valid">apply</button>
-      </div> -->
 
     </form>
 
@@ -31,11 +28,11 @@
       <div class="body">
         @for (order of viewItems; track $index) {
           <div class="order row" [style]="$index%2===0?'background-color:#999':'background-color:white'">
-            <div class="col col-2 text-center">{{$index + 1}}</div>
-            <div class="col col-2" (click)="pro($index)" style="cursor: pointer;">{{order.userName}}</div>
-            <div class="col col-3">{{order.date}}</div>
-            <div class="col col-2">{{order.quantity}}</div>
-            <div class="col col-3 row gap-1">
+            <div class="col col-lg-2 text-center"> <span class="small">Num : </span> {{$index + 1}}</div>
+            <div class="col col-lg-2" (click)="pro($index)" style="cursor: pointer;"> <span class="small">Name : </span> {{order.userName}}</div>
+            <div class="col col-lg-3"> <span class="small">Date : </span> {{order.date}}</div>
+            <div class="col col-lg-2"> <span class="small">Quantity : </span> {{order.quantity}}</div>
+            <div class="col col-lg-3 row gap-1 m-0 ">
               <div class="col-12 col-lg-5  p-0"><button class="btn btn-primary w-100" (click)="details(order)">details</button></div>
               <div class="col-12 col-lg-5  p-0"><button class="btn btn-success w-100" (click)="done(order)">done</button></div>
             </div>
@@ -51,10 +48,10 @@
   <div class="details" [class.hidden]="hidden">
     <div class="d-flex justify-content-between w-100">
       <h2>Details Order</h2>
-      <h3 class="text-danger" (click)="cancel()" style="cursor: pointer;">X</h3>
+      <h3 class="text-danger" (click)="cancel()" style="cursor: pointer;"><i class="fa-solid fa-xmark"></i></h3>
     </div>
-    <div style="width: 100%;">
-      <div class="row ">
+    <div  style="width: 100%;">
+      <div class="row head">
         <div class="col col-3"></div>
         <div class="col col-3">Title</div>
         <div class="col col-2">Price</div>
@@ -62,14 +59,14 @@
         <div class="col col-2 text-center">Total</div>
       </div>
       <!-- <form > -->
-        <div >
+        <div class="body">
           @for (item of detailsOrders; track $index ) {
             <div class="row align-items-center p-3"  [style.backgroundColor]="$index % 2==0 ? '#dbd9d9' : 'white'" >
               <div class="col col-3"><div style="border-radius: 50%;"><img style="border-radius: 50%;" [src]="item.item.image" alt="" width="100px" height="100px"></div></div>
-              <div class="col col-3"><p>{{item.item.title}}</p></div>
-              <div class="col col-2">{{(item.item.price).toFixed(3)}} L.E</div>
-              <div class="col col-2">{{item.quantity}}</div>
-              <td class="col col-2"><p class="text-center">{{total(item)}} L.E</p></td>
+              <div class="col col-3"><p> <span class="small">Title : </span> {{item.item.title}}</p></div>
+              <div class="col col-2"> <span class="small">Price : </span> {{(item.item.price).toFixed(3)}} L.E</div>
+              <div class="col col-2"> <span class="small">Quantity : </span> {{item.quantity}}</div>
+              <div class="col col-2"><p class="text-center"> <span class="small">Totale : </span> {{total(item)}} L.E</p></div>
 
             </div>
           }
@@ -82,16 +79,16 @@
   <div class="profile" [class.hidden]="profile">
     <div class="d-flex justify-content-between w-100">
       <h2>Profile</h2>
-      <h3 class="text-danger" (click)="cancel()" style="cursor: pointer;">X</h3>
+      <h3 class="text-danger" (click)="cancel()" style="cursor: pointer;"><i class="fa-solid fa-xmark"></i></h3>
     </div>
     <div style="width: 100%;">
-      <div class="row ">
+      <div class="row head">
         <div class="col col-3"></div>
         <div class="col col-2">Name</div>
         <div class="col col-5">Email</div>
         <div class="col col-2">Phone</div>
       </div>
-      <div class="row align-items-center p-3"   >
+      <div class="body row align-items-center p-3"   >
         <div class="col col-3 image" ><img style="border-radius: 50%;" [src]="user.image" alt="" width="100px" height="100px"></div>
         <div class="col col-2">{{user.name?.fName +' '+ user.name?.lName}}</div>
         <div class="col col-5">{{user.email}}</div>
