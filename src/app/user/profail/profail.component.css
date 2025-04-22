@@ -99,3 +99,9 @@ input[type="email"] {
 .sp{
   display: none;
 }
+.button{
+  button{
+    width: 100px;
+    margin: 0 5px;
+  }
+}

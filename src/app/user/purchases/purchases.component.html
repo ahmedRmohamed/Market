@@ -12,7 +12,7 @@
     @for (product of products; track $index) {
       <div class="card ">
         <div class="trash">
-          <span (click)="isdelete(product.purchId)"><i class="fa-solid fa-trash"></i></span>
+          <span (click)="isdelete(product.purchId)" style="cursor: pointer;"><i class="fa-solid fa-trash"></i></span>
         </div>
         <a [routerLink]="['/details', product.productId]" [queryParams]="{ path: '/purchases'}">
           <div class="image">

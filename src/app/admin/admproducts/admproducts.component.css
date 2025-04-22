@@ -14,9 +14,7 @@
   background-color: #e2e2e282;
   z-index: 1;
 }
-tr .img{
-/*   border-radius: 50%; */
-}
+
 tr td{
   display: flex;
   align-items: center;

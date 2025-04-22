@@ -44,8 +44,12 @@
   text-align: center;
 }
 .image{
+  width: 100px;
+  height: 100px;
+  padding: 0;
   border-radius: 50%;
-  background-image: url(/public/assets/image/profail2.png);
+  background-image: url(/assets/image/profail2.png);
+  background-size: cover;
 }
 .small{
   display: none;
@@ -84,7 +88,7 @@
     }
     .body{
       flex-direction: column;
-      div{
+      div:not(.image){
         padding: 5px;
         width: 100%;
       }
@@ -93,5 +97,8 @@
   .details .body{
     max-height: 320px;
     overflow-y: auto;
+  }
+  .details .body .row > div:not(.l){
+    border-bottom: 1px solid black;
   }
 }

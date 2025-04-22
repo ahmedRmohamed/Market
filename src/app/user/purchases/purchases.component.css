@@ -76,6 +76,9 @@
   background-color: white;
   padding: 5px;
 }
+.trash:hover{
+  background-color: red;
+}
 .back{
   position: fixed;
   width: 100%;

@@ -54,21 +54,7 @@ export class ProductsComponent implements OnInit{
 
 
   async ngOnInit(){
-    this.authService.getCurrentUserId().subscribe(uid => {
-      this.userId = uid?uid:'';
-      if(uid){
-      this.firebaseService.getCart(this.userId).then(data=>{
-        this.cartId=data
-
-      })
-      if (uid) {
-        this.firebaseService.getCart(this.userId).then(data=>{
-          this.cartId=data
-
-        })
-      }
-      console.log("المعرف الفريد للمستخدم:", this.userId);
-  }});
+    this.isFound()
     this.firebaseService.getItems(`products`).subscribe( data => {
       this.products = data;
       if (data) {
@@ -80,6 +66,19 @@ export class ProductsComponent implements OnInit{
   }
 
 
+  isFound(){
+    this.authService.getCurrentUserId().subscribe(uid => {
+      this.userId = uid?uid:'';
+      if(uid){
+      this.firebaseService.getCart(this.userId).then(data=>{
+        this.cartId=data
+
+      })
+
+      console.log("المعرف الفريد للمستخدم:", this.userId);
+    }});
+  }
+
   addTocart(product:item){
     this.addDisplay=true;
     this.idclick=product.id;
@@ -88,7 +87,7 @@ export class ProductsComponent implements OnInit{
   async add(product:item){
     if((this.input.value > 0) && this.userId ){
 
-      if(product.rating.count>=this.input.value){
+      this.isFound()
         this.addDisplay=false;
         this.idclick=product.id;
         const found=this.cartId.find(item => item.productId === product.id)
@@ -118,7 +117,7 @@ export class ProductsComponent implements OnInit{
         }
 
 
-      }
+
     }
   }
 

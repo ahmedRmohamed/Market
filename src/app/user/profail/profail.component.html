@@ -28,17 +28,17 @@
       <input type="number" formControlName="age" placeholder="Age" [readonly]="!edit">
       <input type="email" formControlName="email" placeholder="Email" readonly>
     </div>
-    <div>
+    <div class="w-100 button">
       @if (!edit) {
-        <div class="text-center mb-3 d-flex gap-1">
+        <div class="text-center mb-3  ">
           <button class="btn btn-warning " (click)="edit=true">Edit</button>
-          <button class="btn btn-danger" (click)="logOut()">Log Out</button>
+          <button class="btn btn-danger " (click)="logOut()">Log Out</button>
         </div>
       }
       @else {
-        <div>
-          <button class="btn btn-success me-2" (click)="save()">Save</button>
-          <button class="btn btn-danger" (click)="edit=false;info()">Cancel</button>
+        <div class="text-center mb-3  ">
+          <button class="btn btn-success  " (click)="save()">Save</button>
+          <button class="btn btn-danger " (click)="edit=false;info()">Cancel</button>
         </div>
       }
 

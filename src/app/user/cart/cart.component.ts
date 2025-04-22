@@ -136,8 +136,7 @@ export class CartComponent {
     return formattedDate
   }
   async order(items:Product[]){
-
-    if (!this.isDisabled.includes(true)||this.isCustom.includes(true)) {
+    if (!this.isDisabled.includes(true)||this.isCustom.includes(true)||items.length===1) {
       const name=`${this.user.name.fName +' ' + this.user.name.lName}`
       this.firebaseService.addOrder(this.userId,items,this.timeNow(),name)
       const nOrder=this.user.order + 1
@@ -163,6 +162,7 @@ export class CartComponent {
       }
       this.disabled=this.isDisabled.includes(true)
       this.customItems()
+
     })
 
 
@@ -176,7 +176,7 @@ export class CartComponent {
       this.cusItems=custom.filter(item=>item!==null)
   }
   cusOrder(){
-    console.log(this.isCustom.includes(true))
+    console.log(this.isCustom)
     if (this.isCustom.includes(true)) {
 
       const custom=this.items.map((item,i)=>this.isCustom[i]?item:null)

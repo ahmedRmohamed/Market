@@ -8,7 +8,7 @@
 }
 @media (max-width:768px) {
   .container{
-    
+
   }
 }
 button {
@@ -39,5 +39,11 @@ html, body {
 
 .main-content {
   flex: 1;
+  margin-top: 86px;
 }
 
+header{
+  position: fixed;
+  width: 100%;
+  z-index: 15;
+}

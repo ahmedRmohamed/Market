@@ -15,12 +15,13 @@
   min-height: 100%;
   top: 0;
   left: 0;
-  background-color: antiquewhite;
+  background-color: white;
 }
 .parent{
   position: relative;
   width: 100%;
   margin: 0;
+  border-bottom: 1px solid #dbd9d9;
 }
 .check{
   position: absolute;
@@ -44,6 +45,7 @@
   top: 100px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 10;
 }
 
 .success {
