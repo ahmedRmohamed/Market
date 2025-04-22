@@ -15,7 +15,7 @@
   z-index: 1;
 }
 tr .img{
-  border-radius: 50%;
+/*   border-radius: 50%; */
 }
 tr td{
   display: flex;
