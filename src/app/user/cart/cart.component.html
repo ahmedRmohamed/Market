@@ -52,7 +52,7 @@
                   <div class="col col-lg-1">{{(item.item.price).toFixed(3)}} L.E</div>
                   <td class="col col-lg-3">
                     <button type="button" class="btn btn-primary" (click)="plus(item,$index)">+</button>
-                    <input type="number" [ngModel]="item.quantity" (ngModelChange)="item.quantity = $event" [ngModelOptions]="{standalone: true}" min="1">
+                    <input type="number" class="text-center" [ngModel]="item.quantity" (ngModelChange)="item.quantity = $event" [ngModelOptions]="{standalone: true}" min="1">
                     <button type="button" class="btn btn-primary" (click)="minas(item,$index) " >-</button>
                   </td>
                   <td class="col col-lg-2"><p class="text-center">{{total(item)}} L.E</p></td>
